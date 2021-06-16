@@ -1,0 +1,186 @@
+<div class="content-wrapper">
+    <section class="content">
+
+
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Issue Book </h3>
+
+
+            </div>
+            <div class="card-body">
+                <div class="col-sm-12">
+                    <form role="form" [formGroup]="issuebook" (ngSubmit)="onsubmit()">
+                        <div class="row">
+
+                            <div class="col-sm-6">
+
+                                <div class="card-body">
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1"> Name Of User :</label>
+                                        <input type="text" class="form-control" id="exampleInputEmail1"
+                                            placeholder="Enter Your Name" formControlName="username" required>
+                                        <span class="error" *ngIf="username.invalid && username.touched">Name of User is
+                                            Reqiured</span>
+                                    </div>
+                                    <div><br /></div>
+                                    <div class="col-sm-3"></div>
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1"> Issue Date :</label>
+                                        <div class="input-group">
+                                            <input class="form-control" required placeholder="yyyy-mm-dd" formControlName="date"
+                                                name="dp" [(ngModel)]="model" ngbDatepicker [dayTemplate]="customDay"
+                                                [markDisabled]="isDisabled" #d="ngbDatepicker">
+                                               
+                                            <div class="input-group-append">
+                                                <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"
+                                                    type="button"><i class="fa fa-calendar"
+                                                        aria-hidden="true"></i></button>
+                                            </div>
+                                        </div>
+                                        <span class="error" *ngIf="date.invalid && date.touched">Date is
+                                            Reqiured</span>
+                                        
+                                    </div>
+                                    <ng-template #customDay let-date let-currentMonth="currentMonth"
+                                        let-selected="selected" let-disabled="disabled" let-focused="focused">
+                                        <span class="custom-day" [class.weekend]="isWeekend(date)"
+                                            [class.focused]="focused" [class.bg-primary]="selected"
+                                            [class.hidden]="date.month !== currentMonth" [class.text-muted]="disabled">
+                                            {{ date.day }}
+                                        </span>
+                                    </ng-template>
+                                    <div><br /></div>
+                                    <div class="col-sm-3">
+
+                                        
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1"> Select Time :</label>
+                                        <input [ngxTimepicker]="picker" formControlName="time"class="form-control" placeholder="Select Time..">
+                                        <ngx-material-timepicker #picker></ngx-material-timepicker>
+                                        <span class="error" *ngIf="time.invalid && time.touched">Time is
+                                            Reqiured</span>
+                                    </div>
+                                    <div><br /></div>
+                                    <div class="form-group">
+                                        <label for="website">Name of Books:</label>
+                                        <select formControlName="bookname" class="form-control">
+                                            <option disabled>Select Book Name</option>
+                                            <option>Choose Book</option>
+                                            <option *ngFor="let item of booklist">{{item.bookname}}</option>
+
+
+                                        </select>
+
+                                        <!---  <div *ngIf="f.website.touched && f.website.invalid" class="alert alert-danger">  
+                                            <div *ngIf="f.website.errors.required">Name is required.</div>  
+                                        </div>  
+                                    </div>  
+                                    <div class="form-group">
+                                        <label class="control-label" for="Book">Name of Book:</label>
+                                        <select *ngIf="getBook()" formControlName="bookname"[(ngModel)]="selectedBook" (change)="onSelectbook($event.target.value)" class="form-control input-lg" id="book"
+                                        >
+                                        <option value="0">Select Book</option>
+                                        <option *ngFor="let book of getBook()" value= {{book.id}}>{{book.bookname}}</option>
+                                        </select>-->
+                                    </div>
+
+
+                                    <div><br /></div>
+
+
+                                    <div>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+
+
+
+
+                            </div>
+                            <div class="col-sm-6">
+
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">ID Proof(Adhar card no) :</label>
+                                        <input type="text" class="form-control" id="exampleInputPassword1"
+                                            maxlength="12" placeholder="Enter Adhar card number"
+                                            formControlName="adharno" required>
+                                        <span class="error" *ngIf="adharno.invalid && adharno.touched">Adhar Number Is
+                                            Reqiured</span>
+
+                                    </div>
+                                    <div><br /></div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Mobile Number :</label>
+                                        <input type="text" class="form-control" id="exampleInputPassword1"
+                                            placeholder="Enter Mobile Number" formControlName="mobilenumber"
+                                            maxlength="10">
+                                    </div>
+                                    <div><br /></div>
+                                    <div class="form-group">
+                                        <label for="website">Name of Author:</label>
+                                        <select formControlName="authorname" class="form-control">
+                                            <option disabled>Select Book Author Name</option>
+                                            <option>Choose Author</option>
+                                            <option *ngFor="let item of booklist">{{item.authorname}}</option>
+
+
+                                        </select>
+
+                                        <!-- <div *ngIf="f.website.touched && f.website.invalid" class="alert alert-danger">  
+                                                <div *ngIf="f.website.errors.required">Name is required.</div>  
+                                            </div>  -->
+                                    </div>
+                                   <!--- <div class="form-group">
+                                        <label for="website">Name of Author:</label>
+                                       {{issuebookdate | date:'M/d/yy, h:mm a'}}
+                                        </div>-->
+                                    <!--- <div class="form-group">
+                                            <label class="control-label" for="Book">Name of Book:</label>
+                                            <select *ngIf="getBook()" formControlName="bookname"[(ngModel)]="selectedBook" (change)="onSelectbook($event.target.value)" class="form-control input-lg" id="book"
+                                            >
+                                            <option value="0">Select Book</option>
+                                            <option *ngFor="let book of getBook()" value= {{book.id}}>{{book.bookname}}</option>
+                                            </select>
+                                            </div>-->
+
+                                    <!--- <div class="form-group">
+                                                <label class="control-label" for="States">Author:</label>
+                                                <select *ngIf="author" formControlName="authorname" [(ngModel)]="selectedAuthor" (change)="onSelectauthor($event.target.value)" class="form-control input-lg" id="state">
+                                                <option value="0">Select Author</option>
+                                                <option *ngFor="let author of author" value= {{author.id}}>{{author.authorname}}</option>
+                                                </select>
+                                                </div>-->
+
+                                    <div class="form-group">
+
+
+                                    </div>
+
+
+                                </div>
+                                <!-- /.card-body -->
+
+
+
+
+
+                            </div>
+                            <!-- /.card-header -->
+                        </div>
+                    </form>
+                    <!-- /.card-body -->
+                </div>
+            </div>
+            <!-- /.card-body -->
+
+        </div>
+        <!-- /.card -->
+
+    </section>
+</div>-->

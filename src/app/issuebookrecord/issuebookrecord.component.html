@@ -1,0 +1,71 @@
+<div class="container-fluid">
+    <section class="container-fluid">
+
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Issue Book Details.</h3>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-5">
+                            Book Search:<input type="text" class="form-control" name="bookname"
+                                placeholder="Enter Book Name " [(ngModel)]="bookname" (ngModelChange)="search()">
+                        </div>
+                        <div class="col-md-5">
+                             Person Name Search:<input type="text" class="form-control" name="username"
+                                placeholder="Enter  Person Name" [(ngModel)]="username"
+                                (ngModelChange)="searchauthorname()">
+                        </div>
+                        <div class="col-md-2">
+                            
+                            <button type="button" routerLink="/issuebook" class="btn btn-success" style="margin-top:22px;">Issue New Book</button>
+                       </div>
+                        <br>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-body">
+                <table class="table  table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th (click)="sort('id')">ID&nbsp;&nbsp;<i class="fa fa-sort"></i></th>
+                            <th (click)="sort('bookname')">Book Name&nbsp;&nbsp;<i class="fa fa-sort"></i></th>
+                            <th (click)="sort('authorname')">Author Name&nbsp;&nbsp;<i class="fa fa-sort"></i></th>
+                            <th (click)="sort('username')">Name Of Person&nbsp;&nbsp;<i class="fa fa-sort"></i></th>
+                            <th (click)="sort('mobilenumber')">Mobile Number &nbsp;&nbsp;<i class="fa fa-sort"></i></th>
+                          <!--  <th (click)="sort('contactinfo')">Contact Info &nbsp;&nbsp;<i class="fa fa-sort"></i></th>
+                            <th (click)="sort('mobileno')">Mobile Number &nbsp;&nbsp;<i class="fa fa-sort"></i></th>-->
+                            
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            *ngFor="let item of booklist | orderBy: key:revers |paginate: {itemsPerPage:5,currentPage:p};">
+                            <td>{{item.id}}</td>
+                            <td>{{item.bookname}}</td>
+        
+                            <td>{{item.authorname}}</td>
+                            <td>{{item.username}}</td>
+                            <td>{{item.mobilenumber}}</td>
+
+
+                            
+
+
+
+                        </tr>
+                    </tbody>
+                    
+                </table>
+                <pagination-controls (pageChange)="p=$event"></pagination-controls>
+            </div>
+
+
+        </div>
+
+
+    </section>
+</div>
